@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "weeks": [
+    {
+      "week": 1,
+      "label": "Pre-season Camp",
+      "tournament": null
+    },
+    {
+      "week": 2,
+      "label": "Regional Amateur Classic",
+      "tournament": {
+        "name": "Regional Amateur Classic",
+        "tier": "AMATEUR_REG",
+        "purse": 15000,
+        "difficulty": 35,
+        "location": "France"
+      }
+    },
+    {
+      "week": 3,
+      "label": "Rest Week",
+      "tournament": null
+    },
+    {
+      "week": 4,
+      "label": "National Amateur Open",
+      "tournament": {
+        "name": "National Amateur Open",
+        "tier": "AMATEUR_NAT",
+        "purse": 45000,
+        "difficulty": 55,
+        "location": "Spain"
+      }
+    }
+  ]
+}
