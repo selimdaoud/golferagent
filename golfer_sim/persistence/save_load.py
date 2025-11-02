@@ -1,0 +1,21 @@
+"""JSON save/load helpers."""
+from __future__ import annotations
+
+import json
+from pathlib import Path
+from typing import Any, Dict
+
+SCHEMA_VERSION = 1
+
+
+def save_state(path: Path, payload: Dict[str, Any]) -> None:
+    data = {"schema_version": SCHEMA_VERSION, **payload}
+    path.write_text(json.dumps(data, indent=2, sort_keys=True))
+
+
+def load_state(path: Path) -> Dict[str, Any]:
+    data = json.loads(path.read_text())
+    version = data.get("schema_version", 0)
+    if version != SCHEMA_VERSION:
+        raise ValueError(f"Unsupported save version {version}")
+    return data
