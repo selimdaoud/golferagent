@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "calendar": "calendars/sample_2026.json",
+  "ranking_points": {
+    "AMATEUR_REG": {
+      "win": 6,
+      "top5": 3,
+      "top10": 2,
+      "cut": 0
+    },
+    "AMATEUR_NAT": {
+      "win": 12,
+      "top5": 6,
+      "top10": 4,
+      "cut": 0
+    },
+    "D2": {
+      "win": 20,
+      "top5": 12,
+      "top10": 8,
+      "cut": 1
+    },
+    "D1": {
+      "win": 40,
+      "top5": 24,
+      "top10": 16,
+      "cut": 2
+    }
+  }
+}
