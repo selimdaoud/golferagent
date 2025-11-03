@@ -55,6 +55,6 @@ This document summarizes the purpose of every file in the repository so future c
 | `golfer_sim/tests/__init__.py` | Marks the tests directory as a package for pytest discovery. |
 | `golfer_sim/tests/test_policy.py` | Smoke test verifying the basic AI policy produces at least one weekly decision. |
 | `golfer_sim/tests/test_engine.py` | Engine integration tests covering training effects, tournament flow, and persistence round-trips. |
-| `golfer_sim/ui/curses_app.py` | Curses-driven MVP dashboard that visualizes the weekly loop, ranking, bankroll, and last journal entry. |
+| `golfer_sim/ui/curses_app.py` | Curses-driven MVP dashboard with interactive decision selection that visualizes the weekly loop, ranking, bankroll, and last journal entry. |
 | `golfer_sim/ui/views/__init__.py` | Placeholder package for future curses sub-views. |
 

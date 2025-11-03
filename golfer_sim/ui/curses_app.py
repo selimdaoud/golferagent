@@ -11,6 +11,7 @@ from ..domain.finance import FinanceLedger
 from ..domain.golfer import Golfer
 from ..domain.ranking import PlayerRanking
 from ..domain.state import GameState
+from ..domain.decision import WeeklyDecision
 
 
 def build_initial_state(engine: SimulationEngine) -> GameState:
@@ -25,7 +26,13 @@ def build_initial_state(engine: SimulationEngine) -> GameState:
     )
 
 
-def draw_dashboard(stdscr: "curses._CursesWindow", state: GameState, decisions: List[str], message: str) -> None:
+def draw_dashboard(
+    stdscr: "curses._CursesWindow",
+    state: GameState,
+    decisions: List[WeeklyDecision],
+    selected_index: int,
+    message: str,
+) -> None:
     stdscr.clear()
     height, width = stdscr.getmaxyx()
 
@@ -48,13 +55,18 @@ def draw_dashboard(stdscr: "curses._CursesWindow", state: GameState, decisions: 
     last_note = state.journal[-1] if state.journal else ""
 
     stdscr.addstr(14, 2, "Agent Suggestions", curses.A_UNDERLINE)
-    for idx, desc in enumerate(decisions):
-        stdscr.addstr(15 + idx, 4, f"• {desc}")
+    if decisions:
+        for idx, decision in enumerate(decisions):
+            attr = curses.A_REVERSE if idx == selected_index else curses.A_NORMAL
+            stdscr.addstr(15 + idx, 4, f"• {decision.description[: width - 6]}", attr)
+    else:
+        stdscr.addstr(15, 4, "No available actions", curses.A_DIM)
 
+    last_line = 15 + max(len(decisions), 1)
     if last_note:
-        stdscr.addstr(15 + len(decisions), 2, f"Last week: {last_note[: width - 4]}")
+        stdscr.addstr(last_line, 2, f"Last week: {last_note[: width - 4]}")
 
-    stdscr.addstr(height - 3, 2, "Press Enter to advance week • q to quit")
+    stdscr.addstr(height - 4, 2, "Use ↑/↓ to choose • Enter to confirm • q to quit")
     if message:
         stdscr.addstr(height - 2, 2, message[: width - 4], curses.A_DIM)
 
@@ -66,17 +78,32 @@ def run(stdscr: "curses._CursesWindow") -> None:
     state = build_initial_state(engine)
     policy = BasicPolicy()
     message = ""
+    decisions = policy.propose_actions(state)
+    selected_index = 0
 
     while True:
-        proposals = [d.description for d in policy.propose_actions(state)]
-        draw_dashboard(stdscr, state, proposals, message)
+        draw_dashboard(stdscr, state, decisions, selected_index, message)
         key = stdscr.getch()
         if key in (ord("q"), ord("Q")):
             break
+        if key in (curses.KEY_UP, ord("k")):
+            selected_index = max(0, selected_index - 1)
+            message = ""
+            continue
+        if key in (curses.KEY_DOWN, ord("j")):
+            if decisions:
+                selected_index = min(len(decisions) - 1, selected_index + 1)
+            message = ""
+            continue
         if key in (10, 13, curses.KEY_ENTER):
+            if not decisions:
+                message = "No actions available this week"
+                continue
+            chosen = decisions[selected_index]
+            engine.advance_week(state, [chosen])
             decisions = policy.propose_actions(state)
-            engine.advance_week(state, decisions)
-            message = f"Advanced to week {state.current_week + 1}"
+            selected_index = 0
+            message = f"Applied: {chosen.description}"
         else:
             message = ""
 

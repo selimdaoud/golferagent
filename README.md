@@ -41,10 +41,10 @@ golfer_sim/
 python -m golfer_sim.ui.curses_app
 ```
 
-Use **Enter** to advance to the next week and **q** to exit. The rule-based
-agent proposes one action per week (play, rest, or rotate through training
-plans). The dashboard displays ranking points, bankroll, and the most recent
-journal note summarising last week.
+Use **↑/↓** to browse the agent's weekly suggestions, **Enter** to confirm the
+highlighted decision, and **q** to exit. The rule-based agent proposes whether
+to play, rest, or rotate through training plans. The dashboard displays ranking
+points, bankroll, and the most recent journal note summarising last week.
 
 ## Running Tests
 
