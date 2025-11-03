@@ -6,9 +6,11 @@ This document summarizes the purpose of every file in the repository so future c
 
 | Path | Purpose |
 | --- | --- |
-| `.gitignore` | Ignores Python caches, virtual environments, and other build artifacts. |
+| `.gitignore` | Ignores Python caches, virtual environments, and distribution build artifacts. |
 | `0` | Placeholder empty file retained from the original project skeleton (no functional impact). |
+| `CHANGELOG.md` | Release notes documenting each tagged version of the simulator. |
 | `README.md` | High-level introduction explaining how to run the simulator, its structure, and available tooling. |
+| `pyproject.toml` | Packaging metadata (name, version, entry points, data files) for building distributable releases. |
 | `golf_menu.py` | Backwards-compatible entry point that simply launches the curses dashboard main loop. |
 | `docs/FILE_OVERVIEW.md` | This document describing the role of every repository file. |
 
@@ -16,7 +18,7 @@ This document summarizes the purpose of every file in the repository so future c
 
 | Path | Purpose |
 | --- | --- |
-| `golfer_sim/__init__.py` | Exposes `SimulationEngine` and `create_default_engine` for consumers importing the package. |
+| `golfer_sim/__init__.py` | Exposes `SimulationEngine`, `create_default_engine`, and the package `__version__`. |
 | `golfer_sim/ai/__init__.py` | Marks the AI strategy namespace as a Python package. |
 | `golfer_sim/ai/llm_adapter.py` | Dataclass stub describing the interface for hooking an external LLM (schedule, negotiation, media advice). |
 | `golfer_sim/ai/memory.py` | Minimal conversation buffer that stores recent AI dialogue snippets with trimming logic. |

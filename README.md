@@ -30,6 +30,22 @@ golfer_sim/
   tests/         # initial smoke tests
 ```
 
+## Installation
+
+Install the published package from PyPI (or a local build artifact) to get the
+latest release:
+
+```bash
+pip install golfer-sim
+```
+
+For development work inside a clone of this repository, install in editable
+mode so changes are picked up immediately:
+
+```bash
+pip install -e .
+```
+
 ## Requirements
 
 - Python 3.9+
@@ -39,6 +55,12 @@ golfer_sim/
 
 ```bash
 python -m golfer_sim.ui.curses_app
+```
+
+or via the installed console script when using a packaged release:
+
+```bash
+golfer-sim
 ```
 
 Use **↑/↓** to browse the agent's weekly suggestions, **Enter** to confirm the
