@@ -22,29 +22,14 @@ class FinanceLedger:
     transactions: List[Transaction] = field(default_factory=list)
 
     def record_income(self, amount: int, category: str, memo: str) -> None:
-        self._append(amount, "PrizePool", "Cash", category, memo)
-
-    def record_expense(self, amount: int, category: str, memo: str) -> None:
-        self._append(amount, "Cash", f"Expense:{category}", category, memo, negate=True)
-
-    def _append(
-        self,
-        amount: int,
-        account_from: str,
-        account_to: str,
-        category: str,
-        memo: str,
-        negate: bool = False,
-    ) -> None:
-        signed_amount = -abs(amount) if negate else abs(amount)
-        self.balance += signed_amount
+        self.balance += amount
         self.transactions.append(
             Transaction(
                 timestamp=date.today(),
-                account_from=account_from,
-                account_to=account_to,
+                account_from="PrizePool",
+                account_to="Cash",
                 category=category,
-                amount=signed_amount,
+                amount=amount,
                 memo=memo,
             )
         )

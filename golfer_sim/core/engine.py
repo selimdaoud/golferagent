@@ -39,7 +39,6 @@ class SimulationEngine:
         for event in weekly_events:
             self.event_bus.publish(event, state)
         state.calendar.advance()
-        state.clear_plan()
         return state
 
     def _apply_decisions(self, state: GameState, decisions: List[WeeklyDecision]) -> None:

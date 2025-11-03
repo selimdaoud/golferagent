@@ -1,7 +1,6 @@
 {
   "schema_version": 1,
   "calendar": "calendars/sample_2026.json",
-  "travel_cost": 350,
   "ranking_points": {
     "AMATEUR_REG": {
       "win": 6,

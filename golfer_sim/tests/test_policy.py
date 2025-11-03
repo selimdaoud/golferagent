@@ -4,7 +4,6 @@ from golfer_sim.core.engine import create_default_engine
 from golfer_sim.domain.agent import AgentCoach
 from golfer_sim.domain.finance import FinanceLedger
 from golfer_sim.domain.golfer import Golfer
-from golfer_sim.domain.ranking import PlayerRanking
 from golfer_sim.domain.state import GameState
 
 
@@ -15,7 +14,6 @@ def build_state() -> GameState:
         agent=AgentCoach(name="Sophie"),
         calendar=engine.scheduler.calendar,
         ledger=FinanceLedger(),
-        ranking=PlayerRanking(),
     )
 
 
