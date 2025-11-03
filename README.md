@@ -49,7 +49,13 @@ pip install -e .
 ## Requirements
 
 - Python 3.9+
-- `pip install windows-curses` on Windows (Linux/macOS bundle `curses`).
+- A terminal that supports ANSI escape sequences.
+- macOS/Linux: `curses` is bundled with Python.
+- Windows: install the `windows-curses` wheel before running the script.
+
+```bash
+pip install windows-curses
+```
 
 ## Running the Dashboard
 
@@ -67,6 +73,23 @@ Use **↑/↓** to browse the agent's weekly suggestions, **Enter** to confirm t
 highlighted decision, and **q** to exit. The rule-based agent proposes whether
 to play, rest, or rotate through training plans. The dashboard displays ranking
 points, bankroll, and the most recent journal note summarising last week.
+
+## Running the legacy `golf_menu.py` script
+
+If you prefer to launch the original single-file curses menu (for example when
+testing in very limited environments), you can still do so:
+
+1. Open a terminal that supports full-screen applications.
+2. Change into the project directory (the folder that contains `golf_menu.py`).
+3. Execute the script with Python:
+   ```bash
+   python3 golf_menu.py
+   ```
+4. Navigate with the arrow keys (or `j`/`k`), press **Enter** to select an
+   item, `b` to go back, and `q` to quit.
+
+If you encounter issues launching the interface in a terminal, verify that
+Python can import `curses` by running `python3 -c "import curses"`.
 
 ## Running Tests
 
