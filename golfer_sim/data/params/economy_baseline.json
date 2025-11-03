@@ -1,0 +1,6 @@
+{
+  "schema_version": 1,
+  "travel_cost_per_event": 1200,
+  "coach_retainers_per_week": 450,
+  "equipment_fitting_cost": 800
+}

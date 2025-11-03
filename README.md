@@ -1,24 +1,56 @@
-# Golf Agent Curses Menu
+# Golfer Career Simulator Skeleton
 
-This repository contains a terminal user interface (TUI) that mirrors the provided Golf Agent simulator flowchart using Python's `curses` module.
+This repository now hosts a modular foundation for a golf career simulation
+game. The focus of this iteration is to provide a complete **M1 milestone**
+experience:
 
-## Requirements
-- Python 3.9+
-- A terminal that supports ANSI escape sequences.
-- macOS/Linux: `curses` is bundled with Python.
-- Windows: install the `windows-curses` wheel before running the script.
+- A deterministic **season engine** with decision application, tournament
+  resolution, and travel/training handling.
+- A **data-driven domain model** that tracks golfer state, ranking points,
+  ledger balances, and journal entries.
+- **Configuration files** (calendar, ranking points, economy baseline) that
+  drive simulation behaviour.
+- A lightweight **curses dashboard** showcasing the weekly loop and the latest
+  agent journal entry.
+- **Persistence helpers** to save and restore a season snapshot.
 
-```bash
-pip install windows-curses
+The codebase follows the high-level roadmap shared in the project brief and is
+designed to be extended over the next development milestones.
+
+## Project Structure
+
+```
+golfer_sim/
+  core/          # simulation loop, scheduler, RNG, rules
+  domain/        # entities (golfer, tournaments, finance, etc.)
+  ai/            # rule-based policy, LLM stubs, memory
+  ui/            # curses dashboard MVP
+  data/          # JSON parameters (calendars, ranking, economy)
+  persistence/   # save/load helpers
+  tests/         # initial smoke tests
 ```
 
-## How to run
-1. Open a terminal that supports full-screen applications.
-2. Change into the project directory (the folder that contains `golf_menu.py`).
-3. Execute the script with Python:
-   ```bash
-   python3 golf_menu.py
-   ```
-4. Navigate with the arrow keys (or `j`/`k`), press **Enter** to select an item, `b` to go back, and `q` to quit.
+## Requirements
 
-If you encounter issues launching the interface in a terminal, you can verify that Python can import `curses` by running `python3 -c "import curses"`.
+- Python 3.9+
+- `pip install windows-curses` on Windows (Linux/macOS bundle `curses`).
+
+## Running the Dashboard
+
+```bash
+python -m golfer_sim.ui.curses_app
+```
+
+Use **Enter** to advance to the next week and **q** to exit. The rule-based
+agent proposes one action per week (play, rest, or rotate through training
+plans). The dashboard displays ranking points, bankroll, and the most recent
+journal note summarising last week.
+
+## Running Tests
+
+```bash
+pytest
+```
+
+The suite covers the policy smoke test, verifies training and tournament flow
+through the engine, and exercises the persistence round-trip helpers.
